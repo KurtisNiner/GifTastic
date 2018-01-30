@@ -13,7 +13,7 @@ var singers = [
 ]
 
 //creating variables
-var gif = [];
+
 var apiKey = "VuA1y06eBzaaE3FaXF9bbb1ry5tUts9u";
 var button = "";
 var buttonName = "";
@@ -25,7 +25,7 @@ function createButtons() {
 
     for (var i = 0; i < singers.length; i++) {
         var button = $("<button>");
-        button.addClass("singerSearchButton btn btn-default ");
+        button.addClass("singerSearchButton btn btn-default");
         button.attr("data-input", singers[i]);
         button.text(singers[i]);
         $("#gifButtons").append(button);
@@ -42,18 +42,18 @@ $("#singerSearchButton").on("click", function (event) {
 
     //adds the value of add singer to the variable searchSinger
     var searchSinger = $("#addSinger").val().trim();
-    console.log(searchSinger);
+
+    // console.log(searchSinger);
 
     //adds the a new button which is styled by css and has the input data of searchSinger
-    var buttonAdded = "<button type = 'button' class='btn btn-default singerSearchButton' id='styleButton' data-input = '" + searchSinger + "'>" + searchSinger + "</button>";
-
+    var buttonAdded = "<button type = 'button' class='btn btn-default singerSearchButton' data-input = " + searchSinger + ">" + searchSinger + "</button>";
+    
     //takes the buttons and prepends it to the other buttons 
     $("#gifButtons").prepend(buttonAdded);
     singers.push(searchSinger);
     assignHandler();
-
-
 });
+
 function assignHandler() {
     $(".singerSearchButton").on("click", function () {
 
@@ -101,15 +101,28 @@ function assignHandler() {
                 //if still, animate
                 //if animate, still
 
-
-
             })
 
     })
+
+    $(".gifs").on("click", function() {
+        // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+        var state = $(this).attr("data-state");
+        // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+        // Then, set the image's data-state to animate
+        // Else set src to the data-still value
+        if (state === "still") {
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+        } else {
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");
+        }
+      });
 }
 assignHandler();
 
-//add buttons to the html page
+
 
 
 

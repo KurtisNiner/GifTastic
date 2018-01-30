@@ -39,9 +39,18 @@
 
 #gifButtonRow{
     text-align: center;
+    padding-bottom: 20px;
 }
 
 #addSinger, #styleButton{
     border-radius: 30px;
 }
 
+.giphyBaby{
+    border-color: purple;
+    text-align: center;
+}
+
+gifs{
+    border-color: blue;
+}
