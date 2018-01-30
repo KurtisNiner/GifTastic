@@ -10,36 +10,44 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
 
-    
+
 
 </head>
 
 <body>
+    <!-- instructions and heading -->
     <div class="jumbotron" id="jumbotron-style">
         <h1 id="header1">Singer Giphy</h1>
         <h2 id="header2">Press A Singer, See A Singer</h2>
     </div>
 
-
+    <!-- singer search area -->
     <div class="row" id="searchButton">
         <div class="col-lg-12" id="search-input">
             <div class="input-group">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="singerSearchButton">Singer Search</button>
                 </span>
-                <input type="text" class="form-control" id="addSinger" placeholder="Enter A Singer Here...">
+                <input type="text" class="form-control" id="addSinger" placeholder="Enter A Singer Here">
             </div>
         </div>
     </div>
 
-    <div class="row" id="gifButtonRow">
-        <div class="col-lg-12" id="gifButtons"></div>
-    </div>
-
+    <!-- gif buttons -->
+        <div class="row" id="gifButtonRow">
+            <div class="col-lg-12" id="gifButtons"></div>
+        </div>
+    
+    <!-- gif output area -->
     <div id="gifs"></div>
+    
 
-<script src="gif.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- //adding jquery library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- adding link to javascript library -->
+    <script src="gif.js"></script>
+
 </body>
 
 </html>

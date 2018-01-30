@@ -37,6 +37,11 @@
     border-radius: 30px;
 }
 
-#addSinger{
+#gifButtonRow{
+    text-align: center;
+}
+
+#addSinger, #styleButton{
     border-radius: 30px;
 }
+
