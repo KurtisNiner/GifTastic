@@ -30,11 +30,11 @@ function createButtons() {
         button.text(singers[i]);
         $("#gifButtons").append(button);
     }
-
 }
 // //this calls the function to create the button
 createButtons();
 
+/////////
 $("#singerSearchButton").on("click", function (event) {
 
     //prevent page from runing script and run what follows
@@ -47,13 +47,14 @@ $("#singerSearchButton").on("click", function (event) {
 
     //adds the a new button which is styled by css and has the input data of searchSinger
     var buttonAdded = "<button type = 'button' class='btn btn-default singerSearchButton' data-input = " + searchSinger + ">" + searchSinger + "</button>";
-    
+
     //takes the buttons and prepends it to the other buttons 
     $("#gifButtons").prepend(buttonAdded);
     singers.push(searchSinger);
     assignHandler();
 });
 
+///////
 function assignHandler() {
     $(".singerSearchButton").on("click", function () {
 
@@ -79,30 +80,49 @@ function assignHandler() {
                 //run a for loop so that it displays the gif image for each button when you click it
                 for (var i = 0; i < 10; i++) {
 
+                    //took from javascript bercause the example of how to do the pausing/unpausing of the animations was in jquery, and i had to do it this way to understand it.
+
+                    $("#gifs").append("<img class = 'giphyDude'  data-still =  " + response.data[i].images.fixed_height_still.url + "  data-animate =  " + response.data[i].images.fixed_height.url + "  data-state =  " + response.data[i].images.fixed_height.url + " src= " + response.data[i].images.fixed_height_still.url + " ></img> ")
+
                     //create a div to hold the images in
-                    var gifDiv = $("<div>");
+                    // var gifDiv = $("<div>");
 
-                    //create the actual image tag to house the image
-                    var gifImgVar = $("<img>");
+                    // //create the actual image tag to house the image
+                    // var gifImgVar = $("<img>");
 
-                    //finding the source to bring the image from the api
-                    var imgSource = response.data[i].images.fixed_height_still.url
-                    console.log(response.data[i]);
+                    // //finding the source to bring the image from the api
+                    // var imgSource = response.data[i].images.fixed_height_still.url;
+                    // // console.log(response.data[i]);
+                    // var imgSource2 = response.data[i].images.fixed_height.url;
+                    // // console.log(response.data[i]);
 
-                    //set image to gifImgVar
-                    gifImgVar.attr("src", imgSource);
+                    // //set image to gifImgVar
+                    // gifImgVar.attr("src", imgSource);
 
-                    //append the gifs from imgSource to the DOM
-                    $("#gifs").append(gifImgVar);
+                    // //append the gifs from imgSource to the DOM
+                    // $("#gifs").append(gifImgVar);
                 }
 
                 // imagesClicked 
                 // check if still
                 //if still, animate
-                //if animate, still
 
             })
 
+         //create a function that animates/makes image still   
+        $(".giphyDude").on("click", function () {
+
+            var state = (this).attr("data-state");
+
+            if (state === "still") {
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animate");
+              } else {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+              }
+
+        })
     })
 
     // $(".gifs").on("click", function() {
