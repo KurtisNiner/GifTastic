@@ -43,8 +43,6 @@ $("#singerSearchButton").on("click", function (event) {
     //adds the value of add singer to the variable searchSinger
     var searchSinger = $("#addSinger").val().trim();
 
-    // console.log(searchSinger);
-
     //adds the a new button which is styled by css and has the input data of searchSinger
     var buttonAdded = "<button type = 'button' class='btn btn-default singerSearchButton' data-input = " + searchSinger + ">" + searchSinger + "</button>";
 
@@ -80,27 +78,22 @@ function assignHandler() {
                 //run a for loop so that it displays the gif image for each button when you click it
                 for (var i = 0; i < 10; i++) {
 
-                    //took from javascript bercause the example of how to do the pausing/unpausing of the animations was in jquery, and i had to do it this way to understand it.
-
-                    $("#gifs").append("<img class = 'giphyDude'  data-still =  " + response.data[i].images.fixed_height_still.url + "  data-animate =  " + response.data[i].images.fixed_height.url + "  data-state =  " + response.data[i].images.fixed_height.url + " src= " + response.data[i].images.fixed_height_still.url + " ></img> ")
-
                     //create a div to hold the images in
-                    // var gifDiv = $("<div>");
+                    var gifDiv = $("<div>");
 
-                    // //create the actual image tag to house the image
-                    // var gifImgVar = $("<img>");
+                    //create the actual image tag to house the image
+                    var gifImgVar = $("<img>");
 
-                    // //finding the source to bring the image from the api
-                    // var imgSource = response.data[i].images.fixed_height_still.url;
-                    // // console.log(response.data[i]);
-                    // var imgSource2 = response.data[i].images.fixed_height.url;
-                    // // console.log(response.data[i]);
+                    //finding the source to bring the image from the api
+                    var imgSource = response.data[i].images.fixed_height_still.url;
 
-                    // //set image to gifImgVar
-                    // gifImgVar.attr("src", imgSource);
+                    var imgSource2 = response.data[i].images.fixed_height.url;
+                    
+                    //set image to gifImgVar
+                    gifImgVar.attr("src", imgSource);
 
-                    // //append the gifs from imgSource to the DOM
-                    // $("#gifs").append(gifImgVar);
+                    //append the gifs from imgSource to the DOM
+                    $("#gifs").append(gifImgVar);
                 }
 
                 // imagesClicked 
@@ -109,8 +102,8 @@ function assignHandler() {
 
             })
 
-         //create a function that animates/makes image still   
-        $(".giphyDude").on("click", function () {
+         //create a function that animates/makes image still  couldnt get it to work, even tried the 
+        $("#gifs").on("click", function () {
 
             var state = (this).attr("data-state");
 
