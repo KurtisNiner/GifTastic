@@ -49,22 +49,22 @@ $("#singerSearchButton").on("click", function (event) {
     //takes the buttons and prepends it to the other buttons 
     $("#gifButtons").prepend(buttonAdded);
     singers.push(searchSinger);
-    assignHandler();
+
 });
 
 ///////
-function assignHandler() {
-    $(".singerSearchButton").on("click", function () {
+
+    $("#gifButtons").on("click",".singerSearchButton", function () {
 
         //empty out existing gif inages 
         $("#gifs").empty();
 
         //define
-        giphySearch = $(this).attr("data-input");
+        var giphySearch = $(this).attr("data-input");
         console.log(giphySearch);
 
         //tell the browser what queryURL you want to use
-        queryURL = "http://api.giphy.com/v1/gifs/search?q=" + giphySearch + "&api_key=VuA1y06eBzaaE3FaXF9bbb1ry5tUts9u&rating=g&limit=10&lang=en";
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + giphySearch + "&api_key=VuA1y06eBzaaE3FaXF9bbb1ry5tUts9u&rating=g&limit=10&lang=en";
 
         //run the ajax function 
         $.ajax({
@@ -78,62 +78,51 @@ function assignHandler() {
                 //run a for loop so that it displays the gif image for each button when you click it
                 for (var i = 0; i < 10; i++) {
 
-                    //create a div to hold the images in
-                    var gifDiv = $("<div>");
+                
+               
 
                     //create the actual image tag to house the image
                     var gifImgVar = $("<img>");
 
                     //finding the source to bring the image from the api
-                    var imgSource = response.data[i].images.fixed_height_still.url;
+                    var stillURL = response.data[i].images.fixed_height_still.url;
 
-                    var imgSource2 = response.data[i].images.fixed_height.url;
+                    var animateURL = response.data[i].images.fixed_height.url;
+
                     
                     //set image to gifImgVar
-                    gifImgVar.attr("src", imgSource);
+                    gifImgVar.attr("src", stillURL);
+                    gifImgVar.attr("state", "still");
+                    gifImgVar.attr("stillURL", stillURL);
+                    gifImgVar.attr("animateURL", animateURL);
 
                     //append the gifs from imgSource to the DOM
                     $("#gifs").append(gifImgVar);
+
+
+                    gifImgVar.on("click", function(){
+                        var state = $(this).attr("state");
+                        var animateURL = $(this).attr("animateURL");
+                        var stillURL = $(this).attr("stillURL");
+
+                        if(state === "still"){
+                            $(this).attr("state", "animate");
+                            $(this).attr("src", animateURL);
+                        }else if(state === "animate"){
+                            $(this).attr("state", "still");
+                            $(this).attr("src", stillURL);
+                            
+                        }
+
+                       })
+
                 }
-
-                // imagesClicked 
-                // check if still
-                //if still, animate
-
-            })
-
-         //create a function that animates/makes image still  couldnt get it to work, even tried the 
-        $("#gifs").on("click", function () {
-
-            var state = (this).attr("data-state");
-
-            if (state === "still") {
-                $(this).attr("src", $(this).attr("data-animate"));
-                $(this).attr("data-state", "animate");
-              } else {
-                $(this).attr("src", $(this).attr("data-still"));
-                $(this).attr("data-state", "still");
-              }
-
-        })
+           
+            }) 
+        
     })
 
-    // $(".gifs").on("click", function() {
-    //     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-    //     var state = $(this).attr("data-state");
-    //     // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-    //     // Then, set the image's data-state to animate
-    //     // Else set src to the data-still value
-    //     // if (state === "still") {
-    //     //   $(this).attr("src", $(this).attr("data-animate"));
-    //     //   $(this).attr("data-state", "animate");
-    //     // } else {
-    //     //   $(this).attr("src", $(this).attr("data-still"));
-    //     //   $(this).attr("data-state", "still");
-    //     // }
-    //   });
-}
-assignHandler();
+
 
 
 
